@@ -15,6 +15,7 @@ import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { StepperModule } from 'primeng/stepper';
+import { FormState } from '../../services/form-state';
 
 @Component({
   selector: 'app-wizard',
@@ -33,8 +34,9 @@ import { StepperModule } from 'primeng/stepper';
 })
 export class Wizard {
   form: FormGroup;
+  formStepsQuantity = 3;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, public formState: FormState) {
     this.form = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
@@ -48,7 +50,9 @@ export class Wizard {
       return this.form.valid;
     } else {
       const isStepValid = this.isStepValid(step);
-      console.log('isStepValid', isStepValid);
+      if (isStepValid) {
+        this.updateFormState(step);
+      }
       return isStepValid;
     }
   }
@@ -70,9 +74,15 @@ export class Wizard {
     return control?.invalid && control.touched;
   }
 
+  updateFormState(step: number) {
+    this.formState.updateData(this.form.value, step);
+  }
+
   submit() {
-    console.log(this.form.value);
-    this.router.navigate(['/success']);
+    if (this.isFormValid()) {
+      this.formState.updateData(this.form.value, this.formStepsQuantity);
+      this.router.navigate(['/success']);
+    }
   }
 
   onNext(activateCallback: (step: number) => void, from: number, to: number) {
