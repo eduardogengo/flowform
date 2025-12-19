@@ -14,18 +14,52 @@
                 class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
               >
                 <div class="">
-                  <input
-                    type="text"
-                    formControlName="firstName"
-                    placeholder="First Name"
-                    class="p-inputtext p-component p-filled mb-3"
-                  />
-                  <input
-                    type="text"
-                    formControlName="lastName"
-                    placeholder="Last Name"
-                    class="p-inputtext p-component p-filled mb-3"
-                  />
+                  <div class="field firstName-field">
+                    <p-iftalabel>
+                      <input
+                        pInputText
+                        id="firstName"
+                        formControlName="firstName"
+                        autocomplete="off"
+                      />
+                      <label for="firstName">First Name</label>
+                    </p-iftalabel>
+                    @if(isFieldInvalid('firstName')){
+                    @if(form.get('firstName')?.errors?.['required']){
+                    <p-message severity="error" size="small" variant="simple"
+                      >Campo obrigatório.</p-message
+                    >
+                    } @else if(form.get('firstName')?.errors?.['minlength']) {
+                    <p-message severity="error" size="small" variant="simple"
+                      >Mínimo de
+                      {{form.get('firstName')?.errors?.['minlength']?.requiredLength}}
+                      caracteres</p-message
+                    >
+                    } }
+                  </div>
+                  <div class="field lastName-field mt-5">
+                    <p-iftalabel>
+                      <input
+                        pInputText
+                        id="lastName"
+                        formControlName="lastName"
+                        autocomplete="off"
+                      />
+                      <label for="lastName">Last Name</label>
+                    </p-iftalabel>
+                    @if(isFieldInvalid('lastName')){
+                    @if(form.get('lastName')?.errors?.['required']){
+                    <p-message severity="error" size="small" variant="simple"
+                      >Campo obrigatório.</p-message
+                    >
+                    } @else if(form.get('lastName')?.errors?.['minlength']) {
+                    <p-message severity="error" size="small" variant="simple"
+                      >Mínimo de
+                      {{form.get('lastName')?.errors?.['minlength']?.requiredLength}}
+                      caracteres</p-message
+                    >
+                    } }
+                  </div>
                 </div>
               </div>
             </div>
@@ -34,7 +68,7 @@
                 label="Next"
                 icon="pi pi-arrow-right"
                 iconPos="right"
-                (onClick)="activateCallback(2)"
+                (onClick)="onNext(activateCallback, 1, 2)"
               />
             </div>
           </ng-template>
@@ -67,13 +101,13 @@
                 label="Back"
                 severity="secondary"
                 icon="pi pi-arrow-left"
-                (onClick)="activateCallback(1)"
+                (onClick)="onBack(activateCallback, 1)"
               />
               <p-button
                 label="Next"
                 icon="pi pi-arrow-right"
                 iconPos="right"
-                (onClick)="activateCallback(3)"
+                (onClick)="onNext(activateCallback, 2, 3)"
               />
             </div>
           </ng-template>
@@ -93,10 +127,9 @@
               <p-button
                 label="Back"
                 icon="pi pi-arrow-left"
-                iconPos="right"
-                (onClick)="activateCallback(2)"
+                (onClick)="onBack(activateCallback, 2)"
               />
-              <p-button type="submit" label="Confirm" icon="pi pi-arrow-right" iconPos="right" />
+              <p-button type="submit" label="Confirm"></p-button>
             </div>
           </ng-template>
         </p-step-panel>
