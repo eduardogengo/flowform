@@ -67,7 +67,13 @@
                 <div class="">
                   <div class="field email-field mb-5">
                     <p-iftalabel>
-                      <input pInputText id="email" formControlName="email" autocomplete="off" />
+                      <input
+                        pInputText
+                        id="email"
+                        formControlName="email"
+                        inputmode="email"
+                        autocomplete="off"
+                      />
                       <label for="email">Email</label>
                     </p-iftalabel>
                     <app-field-error-validation
@@ -76,7 +82,13 @@
                   </div>
                   <div class="field phone-field">
                     <p-iftalabel>
-                      <p-inputmask id="phone" formControlName="phone" mask="(99) 99999-9999" autocomplete="off" />
+                      <p-inputmask
+                        id="phone"
+                        formControlName="phone"
+                        mask="(99) 99999-9999"
+                        inputmode="tel"
+                        autocomplete="off"
+                      />
                       <label for="phone">Phone</label>
                     </p-iftalabel>
                     <app-field-error-validation
