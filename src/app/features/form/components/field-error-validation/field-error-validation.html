@@ -1,0 +1,28 @@
+@if (control?.invalid && control?.touched) {
+    
+
+      @if (control?.errors?.['required']) {
+        <p-message severity="error" size="small" variant="simple">
+          Required
+        </p-message>
+      }
+
+      @else if (control?.errors?.['minlength']) {
+        <p-message severity="error" size="small" variant="simple">
+          At least {{ control?.errors?.['minlength']?.requiredLength }} characters
+        </p-message>
+      }
+
+      @else if (control?.errors?.['email']) {
+        <p-message severity="error" size="small" variant="simple">
+          Invalid email
+        </p-message>
+      }
+
+      @else {
+        <p-message severity="error" size="small" variant="simple">
+          Not valid
+        </p-message>
+      }
+
+    }

@@ -26,18 +26,9 @@
                       />
                       <label for="firstName">First Name</label>
                     </p-iftalabel>
-                    @if(isFieldInvalid('firstName')){
-                    @if(form.get('firstName')?.errors?.['required']){
-                    <p-message severity="error" size="small" variant="simple"
-                      >Campo obrigatório.</p-message
-                    >
-                    } @else if(form.get('firstName')?.errors?.['minlength']) {
-                    <p-message severity="error" size="small" variant="simple"
-                      >Mínimo de
-                      {{form.get('firstName')?.errors?.['minlength']?.requiredLength}}
-                      caracteres</p-message
-                    >
-                    } }
+                    <app-field-error-validation
+                      [control]="form.get('firstName')"
+                    ></app-field-error-validation>
                   </div>
                   <div class="field lastName-field">
                     <p-iftalabel>
@@ -49,18 +40,9 @@
                       />
                       <label for="lastName">Last Name</label>
                     </p-iftalabel>
-                    @if(isFieldInvalid('lastName')){
-                    @if(form.get('lastName')?.errors?.['required']){
-                    <p-message severity="error" size="small" variant="simple"
-                      >Campo obrigatório.</p-message
-                    >
-                    } @else if(form.get('lastName')?.errors?.['minlength']) {
-                    <p-message severity="error" size="small" variant="simple"
-                      >Mínimo de
-                      {{form.get('lastName')?.errors?.['minlength']?.requiredLength}}
-                      caracteres</p-message
-                    >
-                    } }
+                    <app-field-error-validation
+                      [control]="form.get('lastName')"
+                    ></app-field-error-validation>
                   </div>
                 </div>
               </div>
@@ -88,32 +70,18 @@
                       <input pInputText id="email" formControlName="email" autocomplete="off" />
                       <label for="email">Email</label>
                     </p-iftalabel>
-                    @if(isFieldInvalid('email')){ @if(form.get('email')?.errors?.['required']){
-                    <p-message severity="error" size="small" variant="simple"
-                      >Campo obrigatório.</p-message
-                    >
-                    } @else if(form.get('email')?.errors?.['email']) {
-                    <p-message severity="error" size="small" variant="simple"
-                      >Invalid format</p-message
-                    >
-                    } }
+                    <app-field-error-validation
+                      [control]="form.get('email')"
+                    ></app-field-error-validation>
                   </div>
                   <div class="field phone-field">
                     <p-iftalabel>
                       <input pInputText id="phone" formControlName="phone" autocomplete="off" />
                       <label for="phone">Phone</label>
                     </p-iftalabel>
-                    @if(isFieldInvalid('phone')){ @if(form.get('phone')?.errors?.['required']){
-                    <p-message severity="error" size="small" variant="simple"
-                      >Campo obrigatório.</p-message
-                    >
-                    } @else if(form.get('phone')?.errors?.['minlength']) {
-                    <p-message severity="error" size="small" variant="simple"
-                      >Mínimo de
-                      {{form.get('phone')?.errors?.['minlength']?.requiredLength}}
-                      caracteres</p-message
-                    >
-                    } }
+                    <app-field-error-validation
+                      [control]="form.get('phone')"
+                    ></app-field-error-validation>
                   </div>
                 </div>
               </div>

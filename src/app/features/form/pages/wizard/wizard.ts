@@ -16,6 +16,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { StepperModule } from 'primeng/stepper';
 import { FormState } from '../../services/form-state';
+import { FieldErrorValidation } from '../../components/field-error-validation/field-error-validation';
 
 @Component({
   selector: 'app-wizard',
@@ -28,6 +29,7 @@ import { FormState } from '../../services/form-state';
     ReactiveFormsModule,
     JsonPipe,
     MessageModule,
+    FieldErrorValidation
   ],
   templateUrl: './wizard.html',
   styleUrl: './wizard.css',
