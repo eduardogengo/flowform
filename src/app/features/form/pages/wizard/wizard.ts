@@ -15,6 +15,8 @@ import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { StepperModule } from 'primeng/stepper';
+import { InputMaskModule } from 'primeng/inputmask';
+
 import { FormState } from '../../services/form-state';
 import { FieldErrorValidation } from '../../components/field-error-validation/field-error-validation';
 
@@ -29,7 +31,8 @@ import { FieldErrorValidation } from '../../components/field-error-validation/fi
     ReactiveFormsModule,
     JsonPipe,
     MessageModule,
-    FieldErrorValidation
+    FieldErrorValidation,
+    InputMaskModule,
   ],
   templateUrl: './wizard.html',
   styleUrl: './wizard.css',
