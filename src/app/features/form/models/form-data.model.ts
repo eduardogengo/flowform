@@ -6,5 +6,5 @@ export interface FormData {
     phone?: string;
   };
   startedAt: Date;
-  finishedAt?: Date
+  finishedAt?: Date;
 }

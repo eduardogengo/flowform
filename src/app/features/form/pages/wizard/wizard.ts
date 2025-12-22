@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import {
   FormBuilder,
@@ -32,7 +32,7 @@ import { FormState } from '../../services/form-state';
   templateUrl: './wizard.html',
   styleUrl: './wizard.css',
 })
-export class Wizard {
+export class Wizard implements OnInit, OnDestroy {
   form: FormGroup;
   formStepsQuantity = 3;
 
@@ -43,6 +43,16 @@ export class Wizard {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.minLength(8)]],
     });
+  }
+
+  ngOnInit(): void {
+    this.formState.intializeFormData();
+  }
+
+  ngOnDestroy(): void {
+    if (!this.isFormFinished) {
+      this.formState.setFormDataUndefined();
+    }
   }
 
   isFormValid(step?: number): boolean {
@@ -78,9 +88,11 @@ export class Wizard {
     this.formState.updateData(this.form.value, step);
   }
 
+  isFormFinished = false;
   submit() {
     if (this.isFormValid()) {
       this.formState.updateData(this.form.value, this.formStepsQuantity);
+      this.isFormFinished = true;
       this.router.navigate(['/success']);
     }
   }

@@ -5,27 +5,34 @@ import { FormData } from '../models/form-data.model';
   providedIn: 'root',
 })
 export class FormState {
-
   // dados do formulário
-  formData = signal<FormData>({ startedAt: new Date(), data: {} });
+  formData = signal<FormData | undefined>(undefined);
 
   // leitura pública dos dados
 
   updateData(dataForm: any, step: number) {
     console.log('update data', dataForm, step);
-    const formData: FormData = {
-      ...dataForm,
-    };
 
-    console.log('formdata', formData);
+    this.formData.update((current) => {
+      const updated: FormData = {
+        startedAt: current?.startedAt ?? new Date(),
+        data: { ...current?.data, ...dataForm },
+      };
 
+      if (step === 3) {
+        updated.finishedAt = new Date();
+      }
 
-    // this.formData.set(formData);
-    this.formData.update((current) => ({
-      ...current,
-      data: { ...current.data, ...dataForm },
-      ...(step === 3 ? { finishedAt: new Date() } : {}),
-    }));
+      return updated;
+    });
+  }
+
+  intializeFormData() {
+    this.formData.set({ startedAt: new Date(), data: {} });
+  }
+
+  setFormDataUndefined() {
+    this.formData.set(undefined);
   }
 
   // reset opcional (ex: ao finalizar)
