@@ -16,6 +16,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { StepperModule } from 'primeng/stepper';
 import { InputMaskModule } from 'primeng/inputmask';
+import { CardModule } from 'primeng/card';
+
 
 import { FormState } from '../../services/form-state';
 import { FieldErrorValidation } from '../../components/field-error-validation/field-error-validation';
@@ -33,6 +35,7 @@ import { FieldErrorValidation } from '../../components/field-error-validation/fi
     MessageModule,
     FieldErrorValidation,
     InputMaskModule,
+    CardModule
   ],
   templateUrl: './wizard.html',
   styleUrl: './wizard.css',
@@ -46,7 +49,7 @@ export class Wizard implements OnInit, OnDestroy {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(8)]],
+      phone: ['', [Validators.required]],
     });
   }
 
