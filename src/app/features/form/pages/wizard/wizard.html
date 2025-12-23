@@ -60,7 +60,7 @@
 
         <p-step-panel [value]="2">
           <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col h-48">
+            <div class="flex flex-col h-60">
               <div
                 class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
               >
@@ -78,6 +78,21 @@
                     </p-iftalabel>
                     <app-field-error-validation
                       [control]="form.get('email')"
+                    ></app-field-error-validation>
+                  </div>
+                  <div class="field email-confirmation-field mb-5">
+                    <p-iftalabel>
+                      <input
+                        pInputText
+                        id="emailConfirmation"
+                        formControlName="emailConfirmation"
+                        inputmode="email"
+                        autocomplete="off"
+                      />
+                      <label for="emailConfirmation">Email Confirmation</label>
+                    </p-iftalabel>
+                    <app-field-error-validation
+                      [control]="form.get('emailConfirmation')"
                     ></app-field-error-validation>
                   </div>
                   <div class="field phone-field">

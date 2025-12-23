@@ -18,9 +18,9 @@ import { StepperModule } from 'primeng/stepper';
 import { InputMaskModule } from 'primeng/inputmask';
 import { CardModule } from 'primeng/card';
 
-
 import { FormState } from '../../services/form-state';
 import { FieldErrorValidation } from '../../components/field-error-validation/field-error-validation';
+import { matchFields } from '../../validators/match.validator';
 
 @Component({
   selector: 'app-wizard',
@@ -45,12 +45,18 @@ export class Wizard implements OnInit, OnDestroy {
   formStepsQuantity = 3;
 
   constructor(private fb: FormBuilder, private router: Router, public formState: FormState) {
-    this.form = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-    });
+    this.form = this.fb.group(
+      {
+        firstName: ['', [Validators.required, Validators.minLength(3)]],
+        lastName: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
+        emailConfirmation: ['', [Validators.required, Validators.email]],
+        phone: ['', [Validators.required]],
+      },
+      {
+        validators: [matchFields('email', 'emailConfirmation')],
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -75,12 +81,16 @@ export class Wizard implements OnInit, OnDestroy {
     }
   }
 
-   isStepValid(step: number): boolean {
+  isStepValid(step: number): boolean {
     switch (step) {
       case 1:
         return !!(this.form.get('firstName')?.valid && this.form.get('lastName')?.valid);
       case 2:
-        return !!(this.form.get('email')?.valid && this.form.get('phone')?.valid);
+        return !!(
+          this.form.get('email')?.valid &&
+          this.form.get('emailConfirmation')?.valid &&
+          this.form.get('phone')?.valid
+        );
       default:
         return false;
     }
@@ -124,6 +134,7 @@ export class Wizard implements OnInit, OnDestroy {
         break;
       case 2:
         this.form.get('email')?.markAsTouched();
+        this.form.get('emailConfirmation')?.markAsTouched();
         this.form.get('phone')?.markAsTouched();
         break;
     }

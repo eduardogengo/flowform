@@ -19,6 +19,12 @@
         </p-message>
       }
 
+      @else if (control?.errors?.['mismatch']) {
+        <p-message severity="error" size="small" variant="simple">
+          Emails do not match
+        </p-message>
+      }
+
       @else {
         <p-message severity="error" size="small" variant="simple">
           Not valid
