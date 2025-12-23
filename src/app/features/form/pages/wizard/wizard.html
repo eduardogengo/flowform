@@ -5,8 +5,8 @@
     <p-stepper [value]="1" class="basis-[50rem]">
       <p-step-list>
         <p-step [value]="1">Personal Details</p-step>
-        <p-step [value]="2">Contact Information</p-step>
-        <p-step [value]="3">Confirmation</p-step>
+        <p-step [value]="2" [disabled]="!isStepValid(1)" (click)="changeStep(2)">Contact Information</p-step>
+        <p-step [value]="3" [disabled]="!isStepValid(1) || !isStepValid(2)" (click)="changeStep(3)">Confirmation</p-step>
       </p-step-list>
       <p-step-panels>
         <p-step-panel [value]="1">

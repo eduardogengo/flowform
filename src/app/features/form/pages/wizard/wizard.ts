@@ -75,8 +75,7 @@ export class Wizard implements OnInit, OnDestroy {
     }
   }
 
-  private isStepValid(step: number): boolean {
-    console.log('step', step);
+   isStepValid(step: number): boolean {
     switch (step) {
       case 1:
         return !!(this.form.get('firstName')?.valid && this.form.get('lastName')?.valid);
@@ -127,6 +126,20 @@ export class Wizard implements OnInit, OnDestroy {
         this.form.get('email')?.markAsTouched();
         this.form.get('phone')?.markAsTouched();
         break;
+    }
+  }
+
+  changeStep(step: number): void {
+    // Se tentar ir para step 2, valida step 1
+    if (step === 2 && !this.isStepValid(1)) {
+      this.markStepTouched(1);
+      return;
+    }
+    // Se tentar ir para step 3, valida steps 1 e 2
+    if (step === 3 && (!this.isStepValid(1) || !this.isStepValid(2))) {
+      if (!this.isStepValid(1)) this.markStepTouched(1);
+      if (!this.isStepValid(2)) this.markStepTouched(2);
+      return;
     }
   }
 }
