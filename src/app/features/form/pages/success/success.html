@@ -1,1 +1,6 @@
 <p>form concluido: {{ formState.formData() | json }}</p>
+<br>
+<p>Envio realizado às {{ formState.formData()?.finishedAt | date:'medium' }}</p>
+<p>Obrigado</p>
+
+<button [routerLink]="'/'" pButton label="Início"></button>
