@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { FormData } from '../models/form-data.model';
 
 @Injectable({
@@ -12,16 +12,17 @@ export class FormState {
   readonly formData = this._formData.asReadonly();
 
   updateData(dataForm: FormData, isCompleted: boolean) {
+    const finishedAt = isCompleted ? new Date() : undefined;
     this._formData.update((current) => {
       const updated: FormData = {
         startedAt: current?.startedAt ?? new Date(),
-        finishedAt: isCompleted ? new Date() : undefined,
+        finishedAt,
         data: { ...current?.data, ...dataForm },
       };
-
+      
       return updated;
     });
-    if (isCompleted) {
+    if (!!finishedAt) {
       this.markAsSubmitted();
     }
   }
