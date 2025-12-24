@@ -2,58 +2,34 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
 
-## Development server
+It´s a multi-step form built with Angular standalone APIs for demonstration purpose.
 
-To start a local development server, run:
+## Repo
+https://github.com/eduardogengo/flowform
 
-```bash
-ng serve
-```
+## ✨ Features
+- Landing page
+- Multi-step form with validation per step
+- State management using Angular Signals
+- Read-only confirmation step
+- PDF generation with submitted data
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠 Tech Stack
+- Angular (standalone)
+- Reactive Forms
+- Angular Signals
+- PrimeNG
+- Tailwind CSS
 
-## Code scaffolding
+## 🧩 Architecture
+- Feature-based folder structure
+- Centralized form state service
+- Custom validators for cross-field validation
+- Reusable field validation component
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## ▶️ Running locally
+npm install  
+npm start
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🌍 Live Demo
+https://flowform-example.vercel.app/
