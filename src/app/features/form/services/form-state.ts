@@ -5,10 +5,7 @@ import { FormData } from '../models/form-data.model';
   providedIn: 'root',
 })
 export class FormState {
-  // dados do formulário
   formData = signal<FormData | undefined>(undefined);
-
-  // leitura pública dos dados
 
   updateData(dataForm: any, step: number) {
     console.log('update data', dataForm, step);
@@ -33,10 +30,5 @@ export class FormState {
 
   setFormDataUndefined() {
     this.formData.set(undefined);
-  }
-
-  // reset opcional (ex: ao finalizar)
-  reset() {
-    this.formData.set({ startedAt: new Date(), data: {} });
   }
 }
