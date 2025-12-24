@@ -35,14 +35,13 @@ import { matchFields } from '../../validators/match.validator';
     MessageModule,
     FieldErrorValidation,
     InputMaskModule,
-    CardModule
+    CardModule,
   ],
   templateUrl: './wizard.html',
   styleUrl: './wizard.css',
 })
 export class Wizard implements OnInit, OnDestroy {
   form: FormGroup;
-  formStepsQuantity = 3;
 
   constructor(private fb: FormBuilder, private router: Router, public formState: FormState) {
     this.form = this.fb.group(
@@ -60,11 +59,11 @@ export class Wizard implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.formState.intializeFormData();
+    this.formState.initializeFormData();
   }
 
   ngOnDestroy(): void {
-    if (!this.isFormFinished) {
+    if (!this.formState.isFormFinished()) {
       this.formState.setFormDataUndefined();
     }
   }
@@ -75,7 +74,7 @@ export class Wizard implements OnInit, OnDestroy {
     } else {
       const isStepValid = this.isStepValid(step);
       if (isStepValid) {
-        this.updateFormState(step);
+        this.updateFormState();
       }
       return isStepValid;
     }
@@ -101,15 +100,14 @@ export class Wizard implements OnInit, OnDestroy {
     return control?.invalid && control.touched;
   }
 
-  updateFormState(step: number) {
-    this.formState.updateData(this.form.value, step);
+  updateFormState(isCompleted = false) {
+    this.formState.updateData(this.form.value, isCompleted);
   }
 
-  isFormFinished = false;
+  
   submit() {
     if (this.isFormValid()) {
-      this.formState.updateData(this.form.value, this.formStepsQuantity);
-      this.isFormFinished = true;
+      this.updateFormState(true);
       this.router.navigate(['/success']);
     }
   }
@@ -141,12 +139,10 @@ export class Wizard implements OnInit, OnDestroy {
   }
 
   changeStep(step: number): void {
-    // Se tentar ir para step 2, valida step 1
     if (step === 2 && !this.isStepValid(1)) {
       this.markStepTouched(1);
       return;
     }
-    // Se tentar ir para step 3, valida steps 1 e 2
     if (step === 3 && (!this.isStepValid(1) || !this.isStepValid(2))) {
       if (!this.isStepValid(1)) this.markStepTouched(1);
       if (!this.isStepValid(2)) this.markStepTouched(2);

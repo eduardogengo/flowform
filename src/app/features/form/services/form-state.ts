@@ -5,30 +5,42 @@ import { FormData } from '../models/form-data.model';
   providedIn: 'root',
 })
 export class FormState {
-  formData = signal<FormData | undefined>(undefined);
+  private _formData = signal<FormData | undefined>(undefined);
+  private _submitted = signal(false);
 
-  updateData(dataForm: any, step: number) {
-    console.log('update data', dataForm, step);
+  readonly submitted = this._submitted.asReadonly();
+  readonly formData = this._formData.asReadonly();
 
-    this.formData.update((current) => {
+  updateData(dataForm: FormData, isCompleted: boolean) {
+    this._formData.update((current) => {
       const updated: FormData = {
         startedAt: current?.startedAt ?? new Date(),
+        finishedAt: isCompleted ? new Date() : undefined,
         data: { ...current?.data, ...dataForm },
       };
 
-      if (step === 3) {
-        updated.finishedAt = new Date();
-      }
-
       return updated;
     });
+    if (isCompleted) {
+      this.markAsSubmitted();
+    }
   }
 
-  intializeFormData() {
-    this.formData.set({ startedAt: new Date(), data: {} });
+  markAsSubmitted() {
+    this._submitted.set(true);
+  }
+
+  isFormFinished() {
+    return !!this.formData()?.finishedAt;
+  }
+
+  initializeFormData() {
+    this._formData.set({ startedAt: new Date(), data: {} });
+    this._submitted.set(false);
   }
 
   setFormDataUndefined() {
-    this.formData.set(undefined);
+    this._formData.set(undefined);
+    this._submitted.set(false);
   }
 }

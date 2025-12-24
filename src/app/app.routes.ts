@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { successGuard } from './core/guards/success.guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'success',
+    canActivate: [successGuard],
     loadComponent: () => import('./features/form/pages/success/success').then((m) => m.Success),
   },
   {
