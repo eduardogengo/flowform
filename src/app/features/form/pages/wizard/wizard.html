@@ -1,12 +1,16 @@
-<p>form: {{ formState.formData() | json }}</p>
+<p>form: {{ formState.formStateSnapshot() | json }}</p>
 
 <div class="card flex justify-center">
   <form [formGroup]="form" (ngSubmit)="submit()">
     <p-stepper [value]="1" class="basis-[50rem]">
       <p-step-list>
         <p-step [value]="1">Personal Details</p-step>
-        <p-step [value]="2" [disabled]="!isStepValid(1)" (click)="changeStep(2)">Contact Information</p-step>
-        <p-step [value]="3" [disabled]="!isStepValid(1) || !isStepValid(2)" (click)="changeStep(3)">Confirmation</p-step>
+        <p-step [value]="2" [disabled]="!isStepValid(1)" (click)="changeStep(2)"
+          >Contact Information</p-step
+        >
+        <p-step [value]="3" [disabled]="!isStepValid(1) || !isStepValid(2)" (click)="changeStep(3)"
+          >Confirmation</p-step
+        >
       </p-step-list>
       <p-step-panels>
         <p-step-panel [value]="1">
@@ -132,26 +136,7 @@
 
         <p-step-panel [value]="3">
           <ng-template #content let-activateCallback="activateCallback">
-            <p-card>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <strong>First Name</strong>
-                  <p>{{ form.get('firstName')?.value }}</p>
-                </div>
-                <div>
-                  <strong>Last Name</strong>
-                  <p>{{ form.get('lastName')?.value }}</p>
-                </div>
-                <div>
-                  <strong>Email</strong>
-                  <p>{{ form.get('email')?.value }}</p>
-                </div>
-                <div>
-                  <strong>Phone</strong>
-                  <p>{{ form.get('phone')?.value }}</p>
-                </div>
-              </div>
-            </p-card>
+            <app-data-viewer [values]="formState.formStateSnapshot()?.values"></app-data-viewer>
             <div class="flex pt-6 justify-between">
               <p-button
                 label="Back"

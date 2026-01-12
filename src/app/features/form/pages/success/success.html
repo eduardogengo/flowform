@@ -1,6 +1,7 @@
-<p>form concluido: {{ formState.formData() | json }}</p>
-<br>
-<p>Envio realizado às {{ formState.formData()?.finishedAt | date:'medium' }}</p>
+<app-data-viewer [values]="formState.formStateSnapshot()?.values"></app-data-viewer>
+
+<br />
+<p>Envio realizado às {{ formState.formStateSnapshot()?.finishedAt | date : 'medium' }}</p>
 <p>Obrigado</p>
 
 <button [routerLink]="'/'" pButton label="Início"></button>

@@ -1,23 +1,23 @@
 import { Injectable, signal } from '@angular/core';
-import { FormData } from '../models/form-data.model';
+import { FormStateSnapshot } from '../models/form-data.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormState {
-  private _formData = signal<FormData | undefined>(undefined);
+  private _formStateSnapshot = signal<FormStateSnapshot | undefined>(undefined);
   private _submitted = signal(false);
 
   readonly submitted = this._submitted.asReadonly();
-  readonly formData = this._formData.asReadonly();
+  readonly formStateSnapshot = this._formStateSnapshot.asReadonly();
 
-  updateData(dataForm: FormData, isCompleted: boolean) {
+  updateData(dataForm: FormStateSnapshot, isCompleted: boolean) {
     const finishedAt = isCompleted ? new Date() : undefined;
-    this._formData.update((current) => {
-      const updated: FormData = {
+    this._formStateSnapshot.update((current) => {
+      const updated: FormStateSnapshot = {
         startedAt: current?.startedAt ?? new Date(),
         finishedAt,
-        data: { ...current?.data, ...dataForm },
+        values: { ...current?.values, ...dataForm },
       };
       
       return updated;
@@ -32,16 +32,16 @@ export class FormState {
   }
 
   isFormFinished() {
-    return !!this.formData()?.finishedAt;
+    return !!this.formStateSnapshot()?.finishedAt;
   }
 
   initializeFormData() {
-    this._formData.set({ startedAt: new Date(), data: {} });
+    this._formStateSnapshot.set({ startedAt: new Date(), values: {} });
     this._submitted.set(false);
   }
 
   setFormDataUndefined() {
-    this._formData.set(undefined);
+    this._formStateSnapshot.set(undefined);
     this._submitted.set(false);
   }
 }

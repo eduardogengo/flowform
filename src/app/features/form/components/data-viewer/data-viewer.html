@@ -1,0 +1,25 @@
+<p-card>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    @if (values()) {
+      <div>
+        <strong class="block text-sm text-gray-500">First name</strong>
+        <p>{{ values()?.firstName || '-' }}</p>
+      </div>
+
+      <div>
+        <strong class="block text-sm text-gray-500">Last name</strong>
+        <p>{{ values()?.lastName || '-' }}</p>
+      </div>
+
+      <div>
+        <strong class="block text-sm text-gray-500">Email</strong>
+        <p>{{ values()?.email || '-' }}</p>
+      </div>
+
+      <div>
+        <strong class="block text-sm text-gray-500">Phone</strong>
+        <p>{{ values()?.phone || '-' }}</p>
+      </div>
+    }
+  </div>
+</p-card>

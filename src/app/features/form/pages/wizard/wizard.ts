@@ -21,6 +21,7 @@ import { CardModule } from 'primeng/card';
 import { FormState } from '../../services/form-state';
 import { FieldErrorValidation } from '../../components/field-error-validation/field-error-validation';
 import { matchFields } from '../../validators/match.validator';
+import { DataViewer } from "../../components/data-viewer/data-viewer";
 
 @Component({
   selector: 'app-wizard',
@@ -36,7 +37,8 @@ import { matchFields } from '../../validators/match.validator';
     FieldErrorValidation,
     InputMaskModule,
     CardModule,
-  ],
+    DataViewer
+],
   templateUrl: './wizard.html',
   styleUrl: './wizard.css',
 })
