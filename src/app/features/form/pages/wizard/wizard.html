@@ -2,7 +2,11 @@
 
 <div class="card flex justify-center">
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <p-stepper [value]="1" class="basis-[50rem]">
+    <p-stepper [value]="1" class="basis-[50rem]" #step>
+
+        <div class="sm:hidden mb-4 text-center font-medium">
+            {{step.value()}} / 3
+        </div>
       <div class="hidden sm:block">
         <p-step-list>
           <p-step [value]="1">Personal Details</p-step>
