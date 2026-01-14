@@ -1,158 +1,173 @@
-<p>form: {{ formState.formStateSnapshot() | json }}</p>
-
-<div class="card flex justify-center">
+<div class="max-w-3xl mx-auto px-4 py-8">
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <p-stepper [value]="1" class="basis-[50rem]" #step>
+    <p-stepper [value]="1" class="w-full" #step>
+      <!-- Mobile step indicator -->
+      <div class="sm:hidden mb-6 text-center text-sm font-medium text-gray-600">
+        Step {{ step.value() }} of 3
+      </div>
 
-        <div class="sm:hidden mb-4 text-center font-medium">
-            {{step.value()}} / 3
-        </div>
-      <div class="hidden sm:block">
+      <!-- Desktop stepper -->
+      <div class="hidden sm:block mb-8">
         <p-step-list>
-          <p-step [value]="1">Personal Details</p-step>
-          <p-step [value]="2" [disabled]="!isStepValid(1)" (click)="changeStep(2)"
-            >Contact Information</p-step
-          >
+          <p-step [value]="1">Personal details</p-step>
+          <p-step [value]="2" [disabled]="!isStepValid(1)" (click)="changeStep(2)">
+            Contact information
+          </p-step>
           <p-step
             [value]="3"
             [disabled]="!isStepValid(1) || !isStepValid(2)"
             (click)="changeStep(3)"
-            >Confirmation</p-step
           >
+            Confirmation
+          </p-step>
         </p-step-list>
       </div>
+
       <p-step-panels>
+        <!-- STEP 1 -->
         <p-step-panel [value]="1">
           <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col h-48">
-              <div
-                class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
-              >
-                <div class="">
-                  <div class="field firstName-field mb-5">
-                    <p-iftalabel>
-                      <input
-                        pInputText
-                        id="firstName"
-                        formControlName="firstName"
-                        autocomplete="off"
-                      />
-                      <label for="firstName">First Name</label>
-                    </p-iftalabel>
-                    <app-field-error-validation
-                      [control]="form.get('firstName')"
-                    ></app-field-error-validation>
-                  </div>
-                  <div class="field lastName-field">
-                    <p-iftalabel>
-                      <input
-                        pInputText
-                        id="lastName"
-                        formControlName="lastName"
-                        autocomplete="off"
-                      />
-                      <label for="lastName">Last Name</label>
-                    </p-iftalabel>
-                    <app-field-error-validation
-                      [control]="form.get('lastName')"
-                    ></app-field-error-validation>
-                  </div>
-                </div>
+            <div class="flex flex-col items-center gap-5">
+              <div class="field w-full sm:w-1/2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    fluid
+                    id="firstName"
+                    formControlName="firstName"
+                    autocomplete="off"
+                  />
+                  <label for="firstName">First name</label>
+                </p-iftalabel>
+                <app-field-error-validation [control]="form.get('firstName')">
+                </app-field-error-validation>
+              </div>
+
+              <div class="field w-full sm:w-1/2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    fluid
+                    id="lastName"
+                    formControlName="lastName"
+                    autocomplete="off"
+                  />
+                  <label for="lastName">Last name</label>
+                </p-iftalabel>
+                <app-field-error-validation [control]="form.get('lastName')">
+                </app-field-error-validation>
               </div>
             </div>
-            <div class="flex pt-6 justify-end">
+
+            <div class="flex flex-col sm:flex-row gap-3 sm:justify-end mt-8 w-full">
               <p-button
                 label="Next"
                 icon="pi pi-arrow-right"
                 iconPos="right"
+                size="large"
+                [fluid]="true"
                 (onClick)="onNext(activateCallback, 1, 2)"
-              />
+              >
+              </p-button>
             </div>
           </ng-template>
         </p-step-panel>
 
+        <!-- STEP 2 -->
         <p-step-panel [value]="2">
           <ng-template #content let-activateCallback="activateCallback">
-            <div class="flex flex-col h-60">
-              <div
-                class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
-              >
-                <div class="">
-                  <div class="field email-field mb-5">
-                    <p-iftalabel>
-                      <input
-                        pInputText
-                        id="email"
-                        formControlName="email"
-                        inputmode="email"
-                        autocomplete="off"
-                      />
-                      <label for="email">Email</label>
-                    </p-iftalabel>
-                    <app-field-error-validation
-                      [control]="form.get('email')"
-                    ></app-field-error-validation>
-                  </div>
-                  <div class="field email-confirmation-field mb-5">
-                    <p-iftalabel>
-                      <input
-                        pInputText
-                        id="emailConfirmation"
-                        formControlName="emailConfirmation"
-                        inputmode="email"
-                        autocomplete="off"
-                      />
-                      <label for="emailConfirmation">Email Confirmation</label>
-                    </p-iftalabel>
-                    <app-field-error-validation
-                      [control]="form.get('emailConfirmation')"
-                    ></app-field-error-validation>
-                  </div>
-                  <div class="field phone-field">
-                    <p-iftalabel>
-                      <p-inputmask
-                        id="phone"
-                        formControlName="phone"
-                        mask="(99) 99999-9999"
-                        type="tel"
-                        autocomplete="off"
-                      />
-                      <label for="phone">Phone</label>
-                    </p-iftalabel>
-                    <app-field-error-validation
-                      [control]="form.get('phone')"
-                    ></app-field-error-validation>
-                  </div>
-                </div>
+            <div class="flex flex-col items-center gap-5">
+              <div class="field w-full sm:w-1/2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    fluid
+                    id="email"
+                    formControlName="email"
+                    inputmode="email"
+                    autocomplete="off"
+                  />
+                  <label for="email">Email</label>
+                </p-iftalabel>
+                <app-field-error-validation [control]="form.get('email')">
+                </app-field-error-validation>
+              </div>
+
+              <div class="field w-full sm:w-1/2">
+                <p-iftalabel>
+                  <input
+                    pInputText
+                    fluid
+                    id="emailConfirmation"
+                    formControlName="emailConfirmation"
+                    inputmode="email"
+                    autocomplete="off"
+                  />
+                  <label for="emailConfirmation">Email confirmation</label>
+                </p-iftalabel>
+                <app-field-error-validation [control]="form.get('emailConfirmation')">
+                </app-field-error-validation>
+              </div>
+
+              <div class="field w-full sm:w-1/2">
+                <p-iftalabel>
+                  <p-inputmask
+                    id="phone"
+                    fluid
+                    formControlName="phone"
+                    mask="(99) 99999-9999"
+                    inputmode="tel"
+                    autocomplete="off"
+                  >
+                  </p-inputmask>
+                  <label for="phone">Phone</label>
+                </p-iftalabel>
+                <app-field-error-validation [control]="form.get('phone')">
+                </app-field-error-validation>
               </div>
             </div>
-            <div class="flex pt-6 justify-between">
+
+            <div class="flex flex-col sm:flex-row gap-3 sm:justify-between mt-8 w-full">
               <p-button
                 label="Back"
                 severity="secondary"
                 icon="pi pi-arrow-left"
+                size="large"
+                [fluid]="true"
                 (onClick)="onBack(activateCallback, 1)"
-              />
+              >
+              </p-button>
+
               <p-button
                 label="Next"
                 icon="pi pi-arrow-right"
                 iconPos="right"
+                size="large"
+                [fluid]="true"
                 (onClick)="onNext(activateCallback, 2, 3)"
-              />
+              >
+              </p-button>
             </div>
           </ng-template>
         </p-step-panel>
 
+        <!-- STEP 3 -->
         <p-step-panel [value]="3">
           <ng-template #content let-activateCallback="activateCallback">
-            <app-data-viewer [values]="formState.formStateSnapshot()?.values"></app-data-viewer>
-            <div class="flex pt-6 justify-between">
+            <app-data-viewer [values]="formState.formStateSnapshot()?.values"> </app-data-viewer>
+
+            <div class="flex flex-col sm:flex-row gap-3 sm:justify-between mt-8 w-full">
               <p-button
                 label="Back"
+                severity="secondary"
                 icon="pi pi-arrow-left"
+                size="large"
+                [fluid]="true"
                 (onClick)="onBack(activateCallback, 2)"
-              />
-              <p-button type="submit" label="Confirm" [disabled]="form.invalid"></p-button>
+              >
+              </p-button>
+
+              <p-button type="submit" label="Confirm" [disabled]="form.invalid" size="large" [fluid]="true"> </p-button>
             </div>
           </ng-template>
         </p-step-panel>

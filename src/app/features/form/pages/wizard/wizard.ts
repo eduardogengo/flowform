@@ -32,7 +32,6 @@ import { DataViewer } from "../../components/data-viewer/data-viewer";
     InputTextModule,
     IftaLabelModule,
     ReactiveFormsModule,
-    JsonPipe,
     MessageModule,
     FieldErrorValidation,
     InputMaskModule,

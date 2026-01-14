@@ -1,7 +1,9 @@
-<app-data-viewer [values]="formState.formStateSnapshot()?.values"></app-data-viewer>
-
-<br />
-<p>Envio realizado às {{ formState.formStateSnapshot()?.finishedAt | date : 'medium' }}</p>
-<p>Obrigado</p>
-
-<button [routerLink]="'/'" pButton label="Início"></button>
+<div class="m-5">
+  <app-data-viewer [values]="formState.formStateSnapshot()?.values"></app-data-viewer>
+  <div class="mt-3 text-right pr-3">
+    <p>Form sent at {{ formState.formStateSnapshot()?.finishedAt | date : 'medium' }}</p>
+  </div>
+  <div class="text-center mt-5">
+  <button [routerLink]="'/'" pButton label="Home" class="w-full sm:w-auto"></button>
+  </div>
+</div>

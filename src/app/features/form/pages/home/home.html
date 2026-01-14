@@ -1,7 +1,26 @@
-<div class="">
-  <h1 class="text-2xl">Apresentação do projeto</h1>
-  <p>Explicação mais detalhada</p>
-  <div class="flex justify-center mt-16">
-    <button [routerLink]="'/form'" pButton label="Formulário"></button>
+<div class="max-w-xl mx-auto px-4 py-12 text-center">
+  <h1 class="text-3xl sm:text-4xl font-bold mb-4">
+    Flowform
+  </h1>
+
+  <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
+    Flowform is a simple multi-step form application built with Angular.
+    The goal of this project is to demonstrate form validation, state
+    management using Signals, and a clean, user-friendly flow from data
+    input to confirmation.
+  </p>
+
+  <p class="text-base sm:text-lg text-gray-600 leading-relaxed mt-4">
+    It showcases modern Angular features, PrimeNG components, and Tailwind
+    CSS, focusing on clarity, reusability, and maintainable architecture.
+  </p>
+
+  <div class="flex justify-center mt-10">
+    <button
+      pButton
+      label="Open form"
+      class="w-full sm:w-auto"
+      [routerLink]="'/form'">
+    </button>
   </div>
 </div>
