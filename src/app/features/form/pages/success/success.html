@@ -1,9 +1,9 @@
 <div class="m-5">
   <app-data-viewer [values]="formState.formStateSnapshot()?.values"></app-data-viewer>
   <div class="mt-3 text-right pr-3">
-    <p>Form sent at {{ formState.formStateSnapshot()?.finishedAt | date : 'medium' }}</p>
+    <p class="text-gray-700 dark:text-gray-300">Form sent at {{ formState.formStateSnapshot()?.finishedAt | date : 'medium' }}</p>
   </div>
-  <div class="text-center mt-5">
-  <button [routerLink]="'/'" pButton label="Home" class="w-full sm:w-auto"></button>
+  <div class="mt-5 flex justify-center">
+    <button [routerLink]="'/'" pButton label="Home" class="w-full sm:w-auto"></button>
   </div>
 </div>

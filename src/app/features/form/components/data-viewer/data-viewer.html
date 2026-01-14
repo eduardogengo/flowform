@@ -4,27 +4,27 @@
       @if (values()) {
         <div class="space-y-4">
           <!-- First Name -->
-          <div class="border-b border-gray-200 pb-3">
-            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">First name</p>
-            <p class="text-gray-900 break-words">{{ values()?.firstName || '-' }}</p>
+          <div class="border-b border-gray-200 dark:border-gray-700 pb-3">
+            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1">First name</p>
+            <p class="text-gray-900 dark:text-white break-words">{{ values()?.firstName || '-' }}</p>
           </div>
 
           <!-- Last Name -->
-          <div class="border-b border-gray-200 pb-3">
-            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">Last name</p>
-            <p class="text-gray-900 break-words">{{ values()?.lastName || '-' }}</p>
+          <div class="border-b border-gray-200 dark:border-gray-700 pb-3">
+            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1">Last name</p>
+            <p class="text-gray-900 dark:text-white break-words">{{ values()?.lastName || '-' }}</p>
           </div>
 
           <!-- Email -->
-          <div class="border-b border-gray-200 pb-3">
-            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">Email</p>
-            <p class="text-gray-900 break-words">{{ values()?.email || '-' }}</p>
+          <div class="border-b border-gray-200 dark:border-gray-700 pb-3">
+            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1">Email</p>
+            <p class="text-gray-900 dark:text-white break-words">{{ values()?.email || '-' }}</p>
           </div>
 
           <!-- Phone -->
           <div class="pb-3">
-            <p class="text-xs font-semibold text-gray-500 uppercase mb-1">Phone</p>
-            <p class="text-gray-900 break-words">{{ values()?.phone || '-' }}</p>
+            <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1">Phone</p>
+            <p class="text-gray-900 dark:text-white break-words">{{ values()?.phone || '-' }}</p>
           </div>
         </div>
       }

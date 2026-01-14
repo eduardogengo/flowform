@@ -2,7 +2,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <p-stepper [value]="1" class="w-full" #step>
       <!-- Mobile step indicator -->
-      <div class="sm:hidden mb-6 text-center text-sm font-medium text-gray-600">
+      <div class="sm:hidden mb-6 text-center text-sm font-medium text-gray-600 dark:text-gray-400">
         Step {{ step.value() }} of 3
       </div>
 
